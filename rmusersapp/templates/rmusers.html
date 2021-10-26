@@ -1,0 +1,43 @@
+{% extends "webapp.html" %}
+{% block content %}
+<h1>New RM Users.</h1>
+<div>
+  {{ time }}
+  <b>{{ message }}</b>
+</div>
+<hr>
+<div class="dvproject">
+  <form class="frmreg" enctype="multipart/form-data" action="newusers" method="post">
+  {% csrf_token %}
+  <div class="dvreg">
+      <label>Name:</label><br>
+      <input class="cinpt" type="text" id="name" name="name" placeholder="name" value="{{ uname }}" maxlength="30"  required />
+  </div>
+  <div class="dvreg">
+      <label>Surname:</label><br>
+      <input class="cinpt" type="text" id="surname" name="surname" placeholder="surname" value="{{ surname }}" maxlength="30" required />
+  </div>
+  <div class="dvreg">
+      <label>Email:</label><br>
+      <input class="cinpt" type="email" id="email" name="email" placeholder="email" value="{{ email }}" maxlength="30" required />
+  </div>
+  <div class="dvreg">
+      <label>Phone:</label><br>
+      <input class="cinpt" type="text" id="phone" name="phone" placeholder="phone" value="{{ phone }}" maxlength="250" />
+  </div>
+  <div class="dvreg">
+      <label>About:</label><br>
+      <textarea id="message" name="message" placeholder="More Details." maxlength="900"></textarea>
+  </div>
+  <div class="dvreg" id="divAdmin">
+      <p>File: <input type="file" id="filename" name="filename"></p>
+      <p>pdf or jpg or png</p>
+      <p> 500 KB or less </p>
+  </div>
+  <p><input type="submit" value="OK"/></p>
+  </form>
+</div>
+<hr>
+{{ ip }}
+{{ year }}
+{% endblock %}

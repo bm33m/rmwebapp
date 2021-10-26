@@ -1,0 +1,66 @@
+{% extends "webapp.html" %}
+{% block content %}
+  {% load static %}
+<h1>RM Home.</h1>
+<div>
+  {{ time }}
+  <b>{{ message }}</b>
+</div>
+<hr>
+<div>
+  <form class="frmreg" action="helpfilter" method="post">
+  {% csrf_token %}
+    <input class="cinpt" type="email" id="emailfilter" name="emailfilter" placeholder="Enter your email." value="{{ app.email }}" maxlength="250" required />
+    <button type="submit" value="Help">Help</button>
+  </form>
+</div>
+<hr>
+<div class="dvproject">
+  <form class="frmreg" enctype="multipart/form-data" action="updateinfo" method="post">
+  {% csrf_token %}
+  <div class="dvreg">
+      <label>Name:</label><br>
+      <input class="cinpt" type="text" id="txtname" name="name" placeholder="name" value="{{ app.name }}" maxlength="30"  required />
+  </div>
+  <div class="dvreg">
+      <label>Surname:</label><br>
+      <input class="cinpt" type="text" id="surname" name="surname" placeholder="surname" value="{{ app.surname }}" maxlength="30" required />
+  </div>
+  <div class="dvreg">
+      <label>Email:</label><br>
+      <input class="cinpt" type="email" id="email" name="email" placeholder="email" value="{{ app.email }}" maxlength="30" required />
+  </div>
+  <div class="dvreg">
+      <label>Phone:</label><br>
+      <input class="cinpt" type="text" id="phone" name="phone" placeholder="phone" value="{{ app.phone }}" maxlength="264" />
+  </div>
+  <div class="dvreg">
+      <label>About:</label><br>
+      <textarea id="message" name="message" placeholder="More Details." maxlength="900">{{ app.message }}</textarea>
+  </div>
+  <div class="dvreg" id="divAdmin">
+      <p>File: <input type="file" name="filename"></p>
+      <p>pdf or jpg or png</p>
+      <p> 500 KB or less </p>
+  </div>
+  <p><input type="submit" value="Update"/></p>
+  </form>
+</div>
+<hr>
+<div class="dvcpic1">
+  <img src="{% static app.profile %}" alt="{{ app.ref }}">
+</div>
+{{ app.profile }}
+{{ app.userfile }}
+{{ app.updatedinfo }}
+<br>
+{{ app.ref }}
+<br>
+{{ app.rmdate }}
+<br>
+{{ app.rmdateupdated }}
+<hr>
+{{ pname }}
+{{ ip }}
+{{ year }}
+{% endblock %}

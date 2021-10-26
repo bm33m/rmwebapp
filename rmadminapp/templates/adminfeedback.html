@@ -1,0 +1,46 @@
+{% extends "webapp.html" %}
+{% block content %}
+<h1>RM Admin.</h1>
+<div>
+  {{ time }}
+  <b>{{ message }}</b>
+</div>
+<hr>
+<div class="dvproject">
+  <div class="dvreg">
+    <label>Name:</label><br>
+    {{ app.name }}
+  </div>
+  <div class="dvreg">
+    <label>Surname:</label><br>
+    {{ app.surname }}
+  </div>
+  <div class="dvreg">
+    <label>Email:</label><br>
+    {{ app.emailto }}
+  </div>
+  <div class="dvreg">
+    <label>Phone:</label><br>
+    {{ app.phone }}
+  </div>
+  <div class="dvreg">
+    <label>Subject:</label><br>
+    {{ app.subject }}
+  </div>
+  <div class="dvreg">
+    <label>Message:</label><br>
+    {{ app.message }}
+  </div>
+  <div class="dvreg" id="divAdmin">
+    {{ app.attachment }}
+  </div>
+  <div class="dvreg">
+    <label>Ref:</label><br>
+    {{ app.ref }}
+  </div>
+</div>
+<hr>
+{{ pname }}
+{{ ip }}
+{{ year }}
+{% endblock %}

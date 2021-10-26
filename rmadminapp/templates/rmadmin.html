@@ -1,0 +1,109 @@
+{% extends "webapp.html" %}
+{% block content %}
+  {% load static %}
+<h1>RM Admin.</h1>
+<div>
+  {{ time }}
+  <b>{{ message }}</b>
+</div>
+<hr>
+<div class="dvusers">
+  <form class="frmreg" enctype="multipart/form-data" action="rmsend" method="post">
+  {% csrf_token %}
+  <div class="dvreg">
+      <label>Name:</label><br>
+      <input class="cinpt" type="text" id="txtname" name="name" placeholder="name" value="{{ name }}" maxlength="30"  required />
+  </div>
+  <div class="dvreg">
+      <label>Surname:</label><br>
+      <input class="cinpt" type="text" id="surname" name="surname" placeholder="surname" value="{{ surname }}" maxlength="30" required />
+  </div>
+  <div class="dvreg">
+      <label>Email:</label><br>
+      <input class="cinpt" type="email" id="email" name="email" placeholder="email" value="{{ email }}" maxlength="30" required />
+  </div>
+  <div class="dvreg">
+      <label>Phone:</label><br>
+      <input class="cinpt" type="text" id="phone" name="phone" placeholder="phone" value="{{ phone }}" maxlength="264" />
+  </div>
+  <div class="dvreg">
+      <label>Subject:</label><br>
+      <input class="cinpt" type="text" id="subject" name="subject" placeholder="subject" value="{{ subject }}" maxlength="90" required />
+  </div>
+  <div class="dvreg">
+      <label>Message:</label><br>
+      <textarea id="message" name="message" placeholder="More Details." maxlength="900"></textarea>
+  </div>
+  <div class="dvreg" id="divAdmin">
+      <p>File: <input type="file" name="filename"></p>
+      <p>pdf or jpg or png</p>
+      <p> 500 KB or less </p>
+  </div>
+  <p><input type="submit" value="Send"/></p>
+  </form>
+</div>
+<hr>
+<div id="dvusers">
+  <div class="dvtbl">
+    <table id="tblusers">
+    <tbody>
+      <tr class="header">
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Updated</th>
+        <th>info</th>
+      </tr>
+      {% for x in users %}
+      <tr>
+        <td>{{ x.name }}</td>
+        <td>{{ x.surname }}</td>
+        <td>{{ x.email }}</td>
+        <td>{{ x.phone }}</td>
+        <td>{{ x.updatedinfo }}</td>
+        <td>
+          <a href="#txtname">
+            <button type="button" value="Info" onclick="userInfo('{{ x.name }}', '{{ x.surname }}', '{{ x.email }}', '{{ x.phone }}')">Info</button>
+          </a>
+        </td>
+        <td>
+          <a href="#txtname">
+            <div class="dvcpic1" onclick="userInfo('{{ x.name }}', '{{ x.surname }}', '{{ x.email }}', '{{ x.phone }}')">
+              <img src="{% static x.profile %}" alt="{{ x.ref }}">
+            </div>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
+</div>
+<hr>
+<div>
+  {% if users.has_next %}
+    <p>
+        <a href="?page={{users.next_page_number}}">next</a>
+        <a href="?page={{users.paginator.num_pages}}">last &raquo;</a>
+    </p>
+  {% endif %}
+</div>
+<div>
+  <p>{{ users }}</p>
+</div>
+<div>
+  {% if users.has_previous %}
+    <p>
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{users.previous_page_number}}">previous</a>
+    </p>
+  {% endif %}
+</div>
+<hr>
+{{ pname }}
+{{ numberOfUsers }}
+{{ ip }}
+{{ year }}
+<script src="{% static '/rmadminapp/js/app.js' %}"></script>
+{% endblock %}
